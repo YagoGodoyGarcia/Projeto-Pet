@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-var cors = require ('cors'); 
+const cors = require ('cors'); 
 const app = express();
 
 app.use(bodyParser.json())
@@ -9,4 +9,5 @@ app.use(cors());
 require("./database/index")();
 require('./controllers/authPet')(app)
 
-app.listen(3001)
+const port = process.env.PORT || 3000;
+app.listen(port, () => winston.info(`Listening on port ${port}...`));
