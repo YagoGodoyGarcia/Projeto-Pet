@@ -60,14 +60,7 @@ router.put('/atualizar', async (req, res) => {
 router.delete('/remover', async (req, res) => {
     try {
         //Buscando e removendo pet
-        let pet = await Pet.remove({
-            $and: [
-                {
-                    nome: req.body['nome'],
-                    dono: req.body['dono']
-                }
-            ]
-        })
+        let pet = await Pet.deleteOne({ _id: req.body['id'] })
         return res.status(204).send("Deletado")
     } catch (err) {
         //Retorna caso ocorra alguma falha no processo
@@ -76,14 +69,14 @@ router.delete('/remover', async (req, res) => {
 })
 
 //API de buscar pet
-router.get('/pesquisar', async (req, res) => {
+router.get('/pesquisar/:nome/:dono', async (req, res) => {
     try {
         //Buscando o pet
         let pet = await Pet.findOne({
             $and: [
                 {
-                    nome: req.body['nome'],
-                    dono: req.body['dono']
+                    nome: req.params.nome,
+                    dono: req.params.dono
                 }
             ]
         })
