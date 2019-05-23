@@ -6,8 +6,7 @@ const app = express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors());
-require("./database/index")();
-require('./controllers/authPet')(app)
+require('./controllers/usuario')(app)
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
